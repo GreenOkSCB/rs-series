@@ -5,13 +5,13 @@
 // 0   [ [1, 2, 3],
 // 1     [4, 5, 6],
 // 2     [7, 8, 9] ]
-// 
+//
 
 function logEachMatrixItem(matrix) {
   console.log('\nLog each matrix item:');
 
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix[i].length; j++) {
+  for (let i = 0; i < matrix.length; i++) {   // длина матрицы определяется числом строк, т.е. проходим по строчкам - зашли в первую строчку и входим в след.цикл
+    for (let j = 0; j < matrix[i].length; j++) {  // тут проходим по элементам данной строчки
       console.log(`  item {${i}, ${j}} - ${matrix[i][j]}`);
     }
   }
@@ -21,7 +21,7 @@ function showMatrix(matrix) {
   console.log('\nShow matrix:');
 
   for (let i = 0; i < matrix.length; i++) {
-    console.log( matrix[i].join(' ') );
+    console.log( matrix[i].join(' ') );  // .join метод массива, который соединяет все элементы массива + добавляет ' '
   }
 }
 
@@ -51,10 +51,10 @@ function findColumnsWithZero(matrix) {
 
   let columnsWithZeroIdx = [];
 
-  let columnCount = matrix[0].length;
-
-  for (let i = 0; i < columnCount; i++) {
-    for (let j = 0; j < matrix.length; j++) {
+  let columnCount = matrix[0].length;  // подсчет количества столбцов, так как матрица квадратная, на примере первой строки.
+                                        // количество строк мы итак знаем -  matrix.length
+  for (let i = 0; i < columnCount; i++) {   // проходим по столбцам, то есть зашли в первый столбец и входим в след.цикл
+    for (let j = 0; j < matrix.length; j++) {   // далее идем по строчкам, по всем элементам строки
       if (matrix[j][i] === 0) {
         columnsWithZeroIdx.push(i);
         break;
@@ -69,11 +69,12 @@ function snakeBypass(matrix) {
   console.log('\nSnake bypass:');
 
   for (let i = 0; i < matrix.length; i++) {
+    console.log('зашли в строку ' + i);
     for (let j = 0; j < matrix[i].length; j++) {
-      let columnIdx = i % 2 === 0 
-        ? j
-        : (matrix[i].length - j - 1);
-
+      let columnIdx = i % 2 === 0   // если true
+        ? j                         // то в columnIdx записывается текущий j
+        : (matrix[i].length - j - 1);   // иначе в columnIdx записывается результат этого выражения
+      console.log('b '+ i);
       console.log( matrix[i][columnIdx] );
     }
   }
@@ -123,20 +124,20 @@ let matrix = [
   [6, 8, 0, 2],
 ];
 
-// logEachMatrixItem(matrix);
-// showMatrix(matrix);
+// logEachMatrixItem(matrix);   // функция выведение всех элементов матрицы на экран
+// showMatrix(matrix);   // более понятное и красвиое предстваление матрицы
 
-// showSumByRow(matrix);
+// showSumByRow(matrix);  // получение массива сумм элементов в строках
 
-// findColumnsWithZero(matrix);
+// findColumnsWithZero(matrix);  // получение колонок(столбцов) имеющих элемент 0(ноль)
 
-// let smallMatrix = [
-//   [1, 2, 3],
-//   [4, 5, 6],
-//   [7, 8, 9],
-// ];
-// showMatrix(smallMatrix);
-// snakeBypass(smallMatrix);
+let smallMatrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+showMatrix(smallMatrix);
+snakeBypass(smallMatrix);
 
 // logMainDiag(matrix);
 // logSideDiag(matrix);
