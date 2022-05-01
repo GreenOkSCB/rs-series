@@ -1,8 +1,9 @@
 // Stack structure:
-// LIFO - Last In First Out
+ https://www.youtube.com/watch?v=TqlSlaMak8Y&ab_channel=AntonBely
+// LIFO - Last In First Out   // последним пришел - первым вышел
 
 // ------------------------
-// |  1  2  3  4 ...   <->
+// |  1  2  3  4 ...   <->     // только одна точка входа-выхода, т.е. первым пришел - последним ушел и наоборот
 // ------------------------
 
 // Base operations: PUSH / POP / TOP / SIZE / IS_EMPTY
@@ -49,7 +50,7 @@ function bracketsIssue() {
 
     for (let i = 0; i < str.length; i++) {
       let currentSymbol = str[i];
-      
+
       if (OPEN_BRACKETS.includes(currentSymbol)) {
         stack.push(currentSymbol);
       } else {
@@ -75,11 +76,12 @@ function bracketsIssue() {
   console.log('  check case - (){}({}()) -', isBracketsOk('(){}({}())'));
   console.log('  check case - (}({}()) -', isBracketsOk('(}({}())'));
   console.log('  check case - ((()) -', isBracketsOk('((())'));
+  console.log('  check case - )((()) -', isBracketsOk('((())'));
 }
 
 console.log('s01e04 - Stack\n');
 
-stackOnArrayExample();
+// stackOnArrayExample();
 
 bracketsIssue();
 

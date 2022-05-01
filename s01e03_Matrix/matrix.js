@@ -7,7 +7,7 @@
 // 2     [7, 8, 9] ]
 //
 
-function logEachMatrixItem(matrix) {
+function logEachMatrixItem(matrix) {    // функция выведение всех элементов матрицы на экран
   console.log('\nLog each matrix item:');
 
   for (let i = 0; i < matrix.length; i++) {   // длина матрицы определяется числом строк, т.е. проходим по строчкам - зашли в первую строчку и входим в след.цикл
@@ -17,7 +17,9 @@ function logEachMatrixItem(matrix) {
   }
 }
 
-function showMatrix(matrix) {
+// console.log(matrix.flat().length);  // выведет количество всех элементов в матрице
+
+function showMatrix(matrix) {    // более понятное и красивое предстваление матрицы
   console.log('\nShow matrix:');
 
   for (let i = 0; i < matrix.length; i++) {
@@ -25,7 +27,7 @@ function showMatrix(matrix) {
   }
 }
 
-function showSumByRow(matrix) {
+function showSumByRow(matrix) {   // получение массива сумм элементов в строках
   console.log('\nShow sum by row:');
 
   let sumResults = [];
@@ -38,13 +40,14 @@ function showSumByRow(matrix) {
       sum += matrix[i][j];
     }
 
-    sumResults.push(sum);
+    sumResults.push(sum);   // объединяет два или более массивов без изменения текущего
+                            // т.е. добавляет в массив накопленные значения, добавляя к имеющимся.
   }
 
   console.log('  result -', sumResults);
 }
 
-function findColumnsWithZero(matrix) {
+function findColumnsWithZero(matrix) {  // получение колонок(столбцов) имеющих элемент 0(ноль)
   // consider that we have matrix with some data
 
   console.log('\nFind columns with 0:');
@@ -65,34 +68,45 @@ function findColumnsWithZero(matrix) {
   console.log('  result indexes -', columnsWithZeroIdx);
 }
 
-function snakeBypass(matrix) {
+function snakeBypass(matrix) {   // змеёй проходит по строчкам: 1ая строка - слева направо,
+  // 2ая строка справа налево. Т.е. нечетные строки - слева направо и четные строки - справа налево
   console.log('\nSnake bypass:');
 
   for (let i = 0; i < matrix.length; i++) {
-    console.log('зашли в строку ' + i);
     for (let j = 0; j < matrix[i].length; j++) {
       let columnIdx = i % 2 === 0   // если true
         ? j                         // то в columnIdx записывается текущий j
         : (matrix[i].length - j - 1);   // иначе в columnIdx записывается результат этого выражения
-      console.log('b '+ i);
-      console.log( matrix[i][columnIdx] );
+        // высчитывается индекс последнего элемента из массива данной строчки(matrix[i].length-1)
+        // + отнимается шаг по счетчику j, на первом шаге j==0. С увеличением счетчика осуществляется
+        // проход по массиву от последнего элемента к первому.
+      console.log( matrix[i][columnIdx]);
     }
   }
 }
 
-function logMainDiag(matrix) {
-  console.log('\nMain diag:');
+function snakeAllBypass(matrix) { // обход массива от последнего элемента к первому
+  console.log('\nSnake all bypass:');
 
   for (let i = 0; i < matrix.length; i++) {
-    console.log( matrix[i][i] );
+    for (let j = 0; j < matrix[i].length; j++) {
+      console.log( matrix[matrix.length - i - 1][matrix[i].length - j - 1]);
+    }
   }
 }
 
-function logSideDiag(matrix) {
+function logMainDiag(matrix) {   // выведение гланой диагонали
+  console.log('\nMain diag:');
+
+  for (let i = 0; i < matrix.length; i++) {
+    console.log( matrix[i][i] );   // квадратная матрица i==j, поэтому оба индекса i
+  }
+}
+
+function logSideDiag(matrix) {    // выведение побочной диагонали
   console.log('\nSide diag:');
 
   let n = matrix.length;
-
   for (let i = 0; i < n; i++) {
     console.log( matrix[i][n - i - 1] );
   }
@@ -124,8 +138,9 @@ let matrix = [
   [6, 8, 0, 2],
 ];
 
+
 // logEachMatrixItem(matrix);   // функция выведение всех элементов матрицы на экран
-// showMatrix(matrix);   // более понятное и красвиое предстваление матрицы
+// showMatrix(matrix);   // более понятное и красивое предстваление матрицы
 
 // showSumByRow(matrix);  // получение массива сумм элементов в строках
 
@@ -136,11 +151,12 @@ let smallMatrix = [
   [4, 5, 6],
   [7, 8, 9],
 ];
-showMatrix(smallMatrix);
-snakeBypass(smallMatrix);
+// showMatrix(smallMatrix);
+// snakeBypass(smallMatrix);
+// snakeAllBypass(smallMatrix);
 
-// logMainDiag(matrix);
-// logSideDiag(matrix);
+// logMainDiag(matrix);   // выведение гланой диагонали
+// logSideDiag(matrix);   // выведение побочной диагонали
 
-// showMatrix(matrix);
-// showBottomMainTriangle(matrix);
+showMatrix(matrix);
+showBottomMainTriangle(matrix);
